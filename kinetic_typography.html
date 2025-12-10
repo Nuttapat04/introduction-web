@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KINETIC | Typography</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Fonts: 'Oswald' for massive impact -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <style>
+        body {
+            background-color: #0f0f0f;
+            color: #dbdbdb;
+            font-family: 'Oswald', sans-serif;
+            overflow-x: hidden;
+            /* Hide horizontal scroll from marquee */
+            margin: 0;
+        }
+
+        /* 
+           MASSIVE TYPOGRAPHY
+           Using viewport units for truly scalable impact 
+        */
+        .mega-text {
+            font-size: 15vw;
+            line-height: 0.85;
+            text-transform: uppercase;
+            white-space: nowrap;
+            display: block;
+            will-change: transform;
+            /* Optimize for skew/translate */
+            transition: color 0.3s ease;
+            cursor: default;
+        }
+
+        .mega-text:hover {
+            -webkit-text-stroke: 2px #fff;
+            color: transparent;
+        }
+
+        .line-container {
+            overflow: hidden;
+            /* Mask text for reveals if needed */
+            padding: 1vw 0;
+            border-bottom: 1px solid #333;
+        }
+
+        /* Infinite Marquee */
+        .marquee-container {
+            display: flex;
+            width: fit-content;
+            transform: translate3d(0, 0, 0);
+            /* Force GPU */
+        }
+
+        .marquee-item {
+            padding-right: 2vw;
+            flex-shrink: 0;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0f0f0f;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        /* Overlay text utility */
+        .outline-text {
+            -webkit-text-stroke: 1px #555;
+            color: transparent;
+        }
+    </style>
+</head>
+
+<body class="selection:bg-white selection:text-black">
+
+    <!-- Fixed Header -->
+    <header class="fixed top-0 left-0 w-full flex justify-between p-8 z-50 mix-blend-difference">
+        <div class="text-sm font-bold tracking-widest uppercase">Kinetic_Type_v1</div>
+        <div class="text-sm font-bold tracking-widest uppercase">Scroll for Speed</div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="pt-32 pb-32 w-full overflow-hidden">
+
+        <!-- SECTION 1: Skew on Scroll -->
+        <section class="skew-section mb-32">
+            <div class="line-container">
+                <h1 class="mega-text">Interaction</h1>
+            </div>
+            <div class="line-container">
+                <h1 class="mega-text text-right text-gray-500">Designer</h1>
+            </div>
+            <div class="line-container">
+                <h1 class="mega-text">Developer</h1>
+            </div>
+            <div class="line-container">
+                <h1 class="mega-text outline-text">Creative</h1>
+            </div>
+            <div class="line-container">
+                <h1 class="mega-text text-right">Portfolio</h1>
+            </div>
+        </section>
+
+        <!-- SECTION 2: Infinite Marquee -->
+        <section class="mb-32 py-16 bg-[#dbdbdb] text-[#0f0f0f] rotate-[-2deg] scale-110">
+            <div class="marquee-wrapper overflow-hidden">
+                <div class="marquee-container text-[10vw] font-bold leading-none uppercase">
+                    <div class="marquee-item">Strategy • Branding • WebGL • Motion •</div>
+                    <div class="marquee-item">Strategy • Branding • WebGL • Motion •</div>
+                    <div class="marquee-item">Strategy • Branding • WebGL • Motion •</div>
+                    <div class="marquee-item">Strategy • Branding • WebGL • Motion •</div>
+                </div>
+            </div>
+        </section>
+        <section class="mb-32 py-16 bg-[#0f0f0f] text-[#dbdbdb] rotate-[2deg] scale-110">
+            <div class="marquee-wrapper-reverse overflow-hidden">
+                <div class="marquee-container text-[10vw] font-bold leading-none uppercase outline-text">
+                    <div class="marquee-item">Experience • Digital • Future • Code •</div>
+                    <div class="marquee-item">Experience • Digital • Future • Code •</div>
+                    <div class="marquee-item">Experience • Digital • Future • Code •</div>
+                    <div class="marquee-item">Experience • Digital • Future • Code •</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: Content List with Hover Image Reveal potential -->
+        <section class="px-8 mb-32">
+            <div class="grid grid-cols-1 border-t border-gray-800">
+                <div
+                    class="project-row group cursor-pointer border-b border-gray-800 py-12 flex justify-between items-center transition-all hover:px-4 hover:bg-white hover:text-black">
+                    <h2 class="text-6xl font-bold uppercase">Nike Air</h2>
+                    <span class="text-xl md:block hidden">2024</span>
+                </div>
+                <div
+                    class="project-row group cursor-pointer border-b border-gray-800 py-12 flex justify-between items-center transition-all hover:px-4 hover:bg-white hover:text-black">
+                    <h2 class="text-6xl font-bold uppercase">Spotify Wrapped</h2>
+                    <span class="text-xl md:block hidden">2023</span>
+                </div>
+                <div
+                    class="project-row group cursor-pointer border-b border-gray-800 py-12 flex justify-between items-center transition-all hover:px-4 hover:bg-white hover:text-black">
+                    <h2 class="text-6xl font-bold uppercase">Apple Arcade</h2>
+                    <span class="text-xl md:block hidden">2023</span>
+                </div>
+                <div
+                    class="project-row group cursor-pointer border-b border-gray-800 py-12 flex justify-between items-center transition-all hover:px-4 hover:bg-white hover:text-black">
+                    <h2 class="text-6xl font-bold uppercase">Tesla UI</h2>
+                    <span class="text-xl md:block hidden">2022</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: Final Statement -->
+        <section class="text-center py-32">
+            <p class="text-xl mb-4 font-sans tracking-widest text-gray-500">LET'S WORK TOGETHER</p>
+            <a href="mailto:hello@kinetic.com"
+                class="text-[8vw] font-bold uppercase hover:text-white transition-colors underline decoration-2 underline-offset-8">
+                Get in Touch
+            </a>
+        </section>
+
+    </main>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // 1. Velocity Skew Effect
+        // We select all mega-text elements
+        let proxy = { skew: 0 };
+        let skewSetter = gsap.quickSetter(".mega-text", "skewY", "deg");
+        let clamp = gsap.utils.clamp(-20, 20); // Limit skew angle so it's readable
+
+        ScrollTrigger.create({
+            onUpdate: (self) => {
+                let skew = clamp(self.getVelocity() / -300);
+                // Smoothly interpolate to the target skew
+                if (Math.abs(skew) > Math.abs(proxy.skew)) {
+                    proxy.skew = skew;
+                    gsap.to(proxy, {
+                        skew: 0,
+                        duration: 0.8,
+                        ease: "power3",
+                        overwrite: true,
+                        onUpdate: () => skewSetter(proxy.skew)
+                    });
+                }
+            }
+        });
+
+        // 2. Infinite Marquee Animation
+        // Normal Direction
+        gsap.to(".marquee-wrapper .marquee-container", {
+            xPercent: -50, // Move half its width (assuming duplicated content covers full width)
+            repeat: -1,
+            duration: 10,
+            ease: "linear"
+        });
+
+        // Reverse Direction
+        gsap.to(".marquee-wrapper-reverse .marquee-container", {
+            xPercent: -50,
+            repeat: -1,
+            duration: 12,
+            ease: "linear"
+        }).reversed(true); // Actually standard GSAP reverse won't work well on infinite loop like this without logic
+        // Better way for reverse:
+        gsap.fromTo(".marquee-wrapper-reverse .marquee-container",
+            { xPercent: -50 },
+            { xPercent: 0, repeat: -1, duration: 12, ease: "linear" }
+        );
+
+        // 3. Project Row Hover Reveal (Optional Scale/Move)
+        const rows = document.querySelectorAll('.project-row');
+        rows.forEach(row => {
+            row.addEventListener('mouseenter', () => {
+                // Could spawn an image follower here
+            });
+        });
+
+    </script>
+</body>
+
+</html>

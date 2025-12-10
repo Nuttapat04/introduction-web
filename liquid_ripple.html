@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liquid Ripple | WebGL</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #000;
+        }
+
+        canvas {
+            display: block;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .overlay-text {
+            mix-blend-mode: overlay;
+            pointer-events: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- WebGL Container -->
+    <div id="canvas-container" class="fixed inset-0 z-0"></div>
+
+    <!-- UI Overlay -->
+    <main class="relative z-10 w-full h-screen flex flex-col justify-center items-center pointer-events-none">
+
+        <div class="text-center">
+            <h1 class="font-sans text-[12vw] font-bold leading-none text-white tracking-tighter overlay-text">
+                RIPPLE
+            </h1>
+            <p class="mt-4 font-mono text-sm tracking-[0.5em] text-white/80 uppercase overlay-text">
+                Interactive Distortion
+            </p>
+        </div>
+
+        <div
+            class="absolute bottom-12 w-full flex justify-between px-12 text-white/50 text-xs font-mono tracking-widest uppercase">
+            <span>Mouse Interaction</span>
+            <span>WebGL Shader</span>
+        </div>
+
+    </main>
+
+    <!-- Shader Scripts -->
+    <script id="vertexShader" type="x-shader/x-vertex">
+        varying vec2 vUv;
+        void main() {
+            vUv = uv;
+            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        }
+    </script>
+
+    <script id="fragmentShader" type="x-shader/x-fragment">
+        uniform float uTime;
+        uniform vec2 uMouse;
+        uniform sampler2D uTexture;
+        uniform float uIntensity;
+
+        varying vec2 vUv;
+
+        // Psuedo-random 
+        float random(vec2 st) {
+            return fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453123);
+        }
+
+        void main() {
+            vec2 uv = vUv;
+            
+            // Distance from mouse
+            float dist = distance(uv, uMouse);
+            
+            // Decay ripple effect based on distance (simulating touch interaction)
+            // We create a wave that moves outward from opacity/interaction points? 
+            // Actually, for a continuous "flow" + "ripple", let's mix noise and sine waves.
+            
+            // 1. Mouse Interaction Ripples
+            float wave = sin(dist * 30.0 - uTime * 5.0);
+            float mask = smoothstep(0.4, 0.0, dist); // Influence radius
+            float rippleEffect = wave * mask * 0.02 * uIntensity;
+
+            // 2. Background Flow (Simplex-like distortion)
+            float flow = sin(uv.y * 10.0 + uTime) * 0.005 + cos(uv.x * 10.0 + uTime * 0.5) * 0.005;
+
+            // Final UV
+            vec2 distortedUv = uv + rippleEffect + flow;
+
+            // Chromatic Aberration for extra "fluid" style
+            float r = texture2D(uTexture, distortedUv + vec2(0.002, 0.0)).r;
+            float g = texture2D(uTexture, distortedUv).g;
+            float b = texture2D(uTexture, distortedUv - vec2(0.002, 0.0)).b;
+
+            gl_FragColor = vec4(r, g, b, 1.0);
+        }
+    </script>
+
+    <!-- Three.js Setup -->
+    <script type="module">
+        import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js';
+
+        const container = document.getElementById('canvas-container');
+
+        // Scene
+        const scene = new THREE.Scene();
+        const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+        const renderer = new THREE.WebGLRenderer({ alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        container.appendChild(renderer.domElement);
+
+        // Texture
+        const loader = new THREE.TextureLoader();
+        // High-quality abstract water/liquid image
+        const texture = loader.load('https://images.unsplash.com/photo-1541701494587-cb58502866ab?q=80&w=2000', (tex) => {
+            // Basic aspect ratio fix could go here, but cover is simpler in CSS/HTML structure
+            // For shader cover, we rely on UV mapping.
+            tex.minFilter = THREE.LinearFilter;
+        });
+
+        // Material
+        const uniforms = {
+            uTime: { value: 0 },
+            uMouse: { value: new THREE.Vector2(0.5, 0.5) },
+            uTexture: { value: texture },
+            uIntensity: { value: 0.0 } // Starts at 0, goes up on move
+        };
+
+        const material = new THREE.ShaderMaterial({
+            vertexShader: document.getElementById('vertexShader').textContent,
+            fragmentShader: document.getElementById('fragmentShader').textContent,
+            uniforms: uniforms
+        });
+
+        const geometry = new THREE.PlaneGeometry(2, 2);
+        const plane = new THREE.Mesh(geometry, material);
+        scene.add(plane);
+
+        // Interaction
+        const targetMouse = new THREE.Vector2(0.5, 0.5);
+        let targetIntensity = 0;
+
+        window.addEventListener('mousemove', (e) => {
+            targetMouse.x = e.clientX / window.innerWidth;
+            targetMouse.y = 1.0 - (e.clientY / window.innerHeight);
+            targetIntensity = 1.0; // Full intensity when moving
+        });
+
+        // Animation Loop
+        const clock = new THREE.Clock();
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            const dt = clock.getDelta();
+            uniforms.uTime.value += dt;
+
+            // Lerp Mouse
+            uniforms.uMouse.value.lerp(targetMouse, 0.1);
+
+            // Decay Intensity (so ripples stop if mouse stops)
+            targetIntensity *= 0.95; // Decay target slightly if not refreshed? 
+            // Actually, let's decay the UNIFORM intensity towards 0 if no event
+            // But we set targetIntensity to 1.0 on mousemove. 
+            // Better to decay targetIntensity itself every frame? No, we need an "activity" monitor.
+            // Simplified: If mouse moved this frame, set high, else decay.
+
+            // To make it simpler/smoother: Always have small flow, high ripple on move.
+            // Let's just lerp intensity to targetIntensity, and decay targetIntensity.
+            uniforms.uIntensity.value += (targetIntensity - uniforms.uIntensity.value) * 0.1;
+            targetIntensity *= 0.98; // Slowly fade out if no mouse movement
+
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        // Resize
+        window.addEventListener('resize', () => {
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+    </script>
+</body>
+
+</html>

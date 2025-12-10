@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bento Portfolio - Nuttapat</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f5f4;
+            /* stone-100 */
+        }
+
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+
+        /* Hide scrollbar for cleaner look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #d6d3d1;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a8a29e;
+        }
+
+        /* Marquee Animation */
+        .marquee-container {
+            /* Added -webkit- prefix for better browser support (Chrome/Safari) */
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            overflow: hidden;
+            display: flex;
+            gap: 1rem;
+            width: 100%;
+        }
+
+        .marquee-content {
+            display: flex;
+            gap: 0.5rem;
+            animation: marquee 20s linear infinite;
+            min-width: max-content;
+        }
+
+        .marquee-content.reverse {
+            animation: marquee-reverse 20s linear infinite;
+        }
+
+        /* Pause on hover */
+        .marquee-content:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        @keyframes marquee-reverse {
+            0% {
+                transform: translateX(-50%);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex items-center justify-center p-4 selection:bg-stone-300 selection:text-stone-900">
+
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 max-w-6xl w-full perspective-1000">
+
+        <div
+            class="bento-card col-span-1 md:col-span-2 md:row-span-2 bg-white rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col justify-center relative overflow-hidden group">
+            <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                <i class="fa-solid fa-quote-right fa-4x"></i>
+            </div>
+            <h1 class="text-3xl md:text-5xl font-bold text-stone-800 mb-4 leading-tight">
+                Hi, I'm <span class="text-stone-500">Nuttapat</span>. <br>
+                <span class="text-2xl md:text-3xl block mt-1 text-stone-400">(Lookplub)</span>
+            </h1>
+            <p class="text-lg md:text-xl text-stone-600 font-medium h-12 flex items-center">
+                <span id="typewriter"></span><span class="animate-pulse text-stone-400">|</span>
+            </p>
+            <p class="mt-4 text-stone-500 text-sm md:text-base leading-relaxed">
+                Dedicated Computer Science student passionate about Cybersecurity and AI Ethics.
+                Award winner at UNESCO GFEAI2025. Skilled in Linux, Networking, and Programming.
+            </p>
+        </div>
+
+        <div
+            class="bento-card col-span-1 md:row-span-2 bg-stone-900 rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden relative group flex flex-col items-center justify-center p-8">
+            <div
+                class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-stone-800 via-stone-900 to-stone-950 opacity-50">
+            </div>
+            <i
+                class="fa-solid fa-code fa-6x text-stone-700 group-hover:text-stone-500 transition-colors duration-300 z-10"></i>
+            <div class="z-10 mt-6 text-center">
+                <span
+                    class="inline-block px-3 py-1 bg-stone-800 text-stone-400 rounded-full text-xs font-mono border border-stone-700">
+                    <span class="w-2 h-2 rounded-full bg-green-500 inline-block mr-2 animate-pulse"></span>Available
+                </span>
+            </div>
+        </div>
+
+        <div
+            class="bento-card col-span-1 bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col justify-center items-center gap-6">
+            <h3 class="text-stone-400 font-semibold text-sm uppercase tracking-wider self-start w-full text-center">
+                Connect</h3>
+            <div class="flex gap-6">
+                <a href="mailto:pjelato@gmail.com"
+                    class="text-stone-400 hover:text-red-500 hover:scale-125 transition-all duration-300 transform"><i
+                        class="fa-regular fa-envelope fa-2x"></i></a>
+                <a href="https://github.com/Nuttapat04"
+                    class="text-stone-400 hover:text-stone-800 hover:scale-125 transition-all duration-300 transform"><i
+                        class="fa-brands fa-github fa-2x"></i></a>
+                <a href="https://www.linkedin.com/in/nuttapat-ngernshoosri-262a352b1/"
+                    class="text-stone-400 hover:text-blue-600 hover:scale-125 transition-all duration-300 transform"><i
+                        class="fa-brands fa-linkedin fa-2x"></i></a>
+                <a href="#"
+                    class="text-stone-400 hover:text-pink-600 hover:scale-125 transition-all duration-300 transform"><i
+                        class="fa-brands fa-instagram fa-2x"></i></a>
+            </div>
+        </div>
+
+        <div
+            class="bento-card col-span-1 bg-stone-100 rounded-2xl py-6 px-0 shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col gap-4 overflow-hidden relative">
+            <h3 class="text-stone-400 font-semibold text-sm uppercase tracking-wider px-6">Skills</h3>
+
+            <div class="marquee-container">
+                <div class="marquee-content">
+                    <span
+                        class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-medium border border-blue-200">C/C++</span>
+                    <span
+                        class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs font-medium border border-yellow-200">Python</span>
+                    <span
+                        class="px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-xs font-medium border border-orange-200">Java</span>
+                    <span
+                        class="px-3 py-1 bg-yellow-50 text-yellow-600 rounded-full text-xs font-medium border border-yellow-200">JavaScript</span>
+                    <span
+                        class="px-3 py-1 bg-sky-100 text-sky-800 rounded-full text-xs font-medium border border-sky-200">Dart</span>
+                    <span
+                        class="px-3 py-1 bg-orange-50 text-orange-600 rounded-full text-xs font-medium border border-orange-200">HTML/CSS</span>
+                    <span
+                        class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-xs font-medium border border-purple-200">PHP</span>
+                    <span
+                        class="px-3 py-1 bg-red-100 text-red-800 rounded-full text-xs font-medium border border-red-200">Swift</span>
+                    <span
+                        class="px-3 py-1 bg-gray-200 text-gray-800 rounded-full text-xs font-medium border border-gray-300">Bash</span>
+                    <span
+                        class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-medium border border-blue-200">SQL</span>
+                    <span
+                        class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-medium border border-blue-200">C/C++</span>
+                    <span
+                        class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs font-medium border border-yellow-200">Python</span>
+                    <span
+                        class="px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-xs font-medium border border-orange-200">Java</span>
+                    <span
+                        class="px-3 py-1 bg-yellow-50 text-yellow-600 rounded-full text-xs font-medium border border-yellow-200">JavaScript</span>
+                    <span
+                        class="px-3 py-1 bg-sky-100 text-sky-800 rounded-full text-xs font-medium border border-sky-200">Dart</span>
+                    <span
+                        class="px-3 py-1 bg-orange-50 text-orange-600 rounded-full text-xs font-medium border border-orange-200">HTML/CSS</span>
+                </div>
+            </div>
+
+            <div class="marquee-container">
+                <div class="marquee-content reverse">
+                    <span
+                        class="px-3 py-1 bg-cyan-100 text-cyan-800 rounded-full text-xs font-medium border border-cyan-200">Flutter</span>
+                    <span
+                        class="px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-xs font-medium border border-blue-200">ReactJS</span>
+                    <span
+                        class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs font-medium border border-green-200">Django</span>
+                    <span
+                        class="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-xs font-medium border border-gray-200">Flask</span>
+                    <span
+                        class="px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-xs font-medium border border-orange-200">Git</span>
+                    <span
+                        class="px-3 py-1 bg-orange-400 text-white rounded-full text-xs font-medium border border-orange-500">Postman</span>
+                    <span
+                        class="px-3 py-1 bg-yellow-200 text-yellow-800 rounded-full text-xs font-medium border border-yellow-300">Firebase</span>
+                    <span
+                        class="px-3 py-1 bg-blue-600 text-white rounded-full text-xs font-medium border border-blue-700">Azure</span>
+                    <span
+                        class="px-3 py-1 bg-blue-200 text-blue-800 rounded-full text-xs font-medium border border-blue-300">MySQL</span>
+                    <span
+                        class="px-3 py-1 bg-purple-200 text-purple-800 rounded-full text-xs font-medium border border-purple-300">Figma</span>
+                    <span
+                        class="px-3 py-1 bg-cyan-100 text-cyan-800 rounded-full text-xs font-medium border border-cyan-200">Flutter</span>
+                    <span
+                        class="px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-xs font-medium border border-blue-200">ReactJS</span>
+                    <span
+                        class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs font-medium border border-green-200">Django</span>
+                    <span
+                        class="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-xs font-medium border border-gray-200">Flask</span>
+                    <span
+                        class="px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-xs font-medium border border-orange-200">Git</span>
+                </div>
+            </div>
+        </div>
+
+        <div
+            class="bento-card col-span-1 md:col-span-2 bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col md:flex-row gap-6 items-center">
+            <div class="w-full md:w-1/2 h-48 rounded-xl overflow-hidden shadow-inner relative group">
+                <img src="https://images.unsplash.com/photo-1555099962-4199c345e5dd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80"
+                    alt="Project"
+                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+            </div>
+            <div class="w-full md:w-1/2 flex flex-col justify-between h-full py-2">
+                <div>
+                    <span class="text-xs font-bold text-stone-400 uppercase tracking-widest">Awards & Projects</span>
+                    <h3 class="text-2xl font-bold text-stone-800 mt-1 mb-2">Tagtime Medicare</h3>
+                    <p class="text-stone-500 text-sm mb-4">
+                        RFID-based app for medicine tracking. 3rd place presentation award at UNESCO GFEAI2025.
+                        Built with Flutter (Dart).
+                    </p>
+                </div>
+                <a href="#"
+                    class="inline-flex items-center justify-center px-6 py-3 bg-stone-800 text-white font-medium rounded-lg hover:bg-stone-700 hover:shadow-lg hover:shadow-stone-500/30 transition-all duration-300 group w-max">
+                    View Work
+                    <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                </a>
+            </div>
+        </div>
+
+        <div
+            class="bento-card col-span-1 md:col-span-2 bg-stone-800 rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow duration-300 flex items-center justify-between text-stone-100 relative overflow-hidden">
+            <div class="z-10">
+                <h3 class="text-2xl font-bold mb-1">Let's work together.</h3>
+                <p class="text-stone-400">Available for freelance projects.</p>
+            </div>
+            <div class="z-10">
+                <a href="mailto:pjelato@gmail.com"
+                    class="w-12 h-12 bg-white text-stone-800 rounded-full flex items-center justify-center hover:scale-110 transition-transform duration-300">
+                    <i class="fa-regular fa-envelope fa-lg"></i>
+                </a>
+            </div>
+            <div
+                class="absolute -right-10 -bottom-10 w-40 h-40 bg-stone-700 rounded-full opacity-20 pointer-events-none">
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script>
+        // Wait for DOM to load
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // 1. Stagger Fade-in Animation
+            gsap.from(".bento-card", {
+                duration: 0.8,
+                y: 50,
+                opacity: 0,
+                stagger: 0.1,
+                ease: "power2.out",
+                delay: 0.2
+            });
+
+            // 2. Typewriter Effect
+            const words = ["Cyber Security.", "Penetration Testing.", "Network Defense.", "Full Stack."];
+            let i = 0;
+
+            function typeWriter() {
+                const speed = 100;
+                const wait = 2000;
+                const text = words[i % words.length];
+                const element = document.getElementById("typewriter");
+
+                let charIndex = 0;
+                let isDeleting = false;
+
+                function type() {
+                    const current = isDeleting
+                        ? text.substring(0, charIndex--)
+                        : text.substring(0, charIndex++);
+
+                    element.textContent = current;
+
+                    if (!isDeleting && charIndex === text.length + 1) {
+                        isDeleting = true;
+                        setTimeout(type, wait);
+                    } else if (isDeleting && charIndex === 0) {
+                        isDeleting = false;
+                        i++;
+                        setTimeout(typeWriter, 500);
+                    } else {
+                        setTimeout(type, isDeleting ? speed / 2 : speed);
+                    }
+                }
+                type();
+            }
+            typeWriter();
+
+            // 3. 3D Tilt Effect
+            const cards = document.querySelectorAll('.bento-card');
+
+            cards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+
+                    const xPct = x / rect.width;
+                    const yPct = y / rect.height;
+
+                    const xRotation = (yPct - 0.5) * -10; // Rotate X based on Y position
+                    const yRotation = (xPct - 0.5) * 10;  // Rotate Y based on X position
+
+                    gsap.to(card, {
+                        duration: 0.5,
+                        rotationX: xRotation,
+                        rotationY: yRotation,
+                        scale: 1.02,
+                        transformPerspective: 1000,
+                        transformOrigin: "center",
+                        ease: "power1.out"
+                    });
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    gsap.to(card, {
+                        duration: 0.5,
+                        rotationX: 0,
+                        rotationY: 0,
+                        scale: 1,
+                        ease: "power1.out"
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

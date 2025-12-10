@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEO-BRUTALISM | RAW UI</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-color: #FAFF00;
+            /* Neon Yellow */
+            --primary: #FF00FF;
+            /* Hot Pink */
+            --secondary: #00FFFF;
+            /* Cyan */
+            --accent: #000000;
+            --border: 3px solid #000;
+            --shadow: 6px 6px 0px 0px #000;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: black;
+            font-family: 'Space Mono', monospace;
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        .display-font {
+            font-family: 'Archivo Black', sans-serif;
+            text-transform: uppercase;
+        }
+
+        /* HARD SHADOW UTILS */
+        .neo-box {
+            background: white;
+            border: var(--border);
+            box-shadow: var(--shadow);
+            transition: all 0.1s ease-in-out;
+        }
+
+        .neo-box:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 8px 8px 0px 0px #000;
+        }
+
+        .neo-btn {
+            background: var(--primary);
+            border: var(--border);
+            box-shadow: var(--shadow);
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.1s;
+        }
+
+        .neo-btn:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 8px 8px 0px 0px #000;
+        }
+
+        .neo-btn:active {
+            transform: translate(4px, 4px);
+            box-shadow: 0px 0px 0px 0px #000;
+        }
+
+        .neo-img-container {
+            border: var(--border);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .neo-img-container img {
+            transition: filter 0.2s;
+            mix-blend-mode: normal;
+        }
+
+        .neo-img-container:hover img {
+            filter: invert(1) contrast(1.5);
+        }
+
+        /* GLITCH HOVER overlay */
+        .neo-img-container::after {
+            content: "GLITCH";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Archivo Black';
+            font-size: 2rem;
+            color: yellow;
+            opacity: 0;
+            pointer-events: none;
+            mix-blend-mode: difference;
+        }
+
+        .neo-img-container:hover::after {
+            opacity: 1;
+        }
+
+        /* MARQUEE */
+        .marquee {
+            width: 100vw;
+            background: black;
+            color: white;
+            padding: 1rem 0;
+            border-top: var(--border);
+            border-bottom: var(--border);
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .marquee-content {
+            display: inline-block;
+            animation: scroll 15s linear infinite;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+    </style>
+</head>
+
+<body class="p-4 md:p-8">
+
+    <!-- NAV -->
+    <nav class="flex justify-between items-center mb-12 neo-box p-4 bg-white">
+        <div class="text-2xl display-font tracking-tighter">WTF_STUDIO.</div>
+        <div class="hidden md:flex gap-4">
+            <a href="#" class="hover:underline decoration-4 underline-offset-4 decoration-pink-500 font-bold">Work</a>
+            <a href="#" class="hover:underline decoration-4 underline-offset-4 decoration-cyan-500 font-bold">About</a>
+            <a href="#" class="hover:underline decoration-4 underline-offset-4 decoration-black font-bold">Contact</a>
+        </div>
+        <button class="neo-btn px-6 py-2 text-sm bg-cyan-400">Menu</button>
+    </nav>
+
+    <!-- HERO GRID -->
+    <main class="grid grid-cols-1 md:grid-cols-12 gap-6 mb-12">
+
+        <!-- Big Text Area -->
+        <div
+            class="col-span-1 md:col-span-8 neo-box p-8 md:p-12 bg-[#FF90E8] flex flex-col justify-center min-h-[400px]">
+            <h1 class="text-6xl md:text-8xl leading-[0.9] mb-6">
+                MAKE IT <br>
+                <span class="text-white drop-shadow-[4px_4px_0_#000] text-transparent"
+                    style="-webkit-text-stroke: 3px black;">POP!</span>
+            </h1>
+            <p
+                class="font-bold text-xl max-w-md bg-white border-2 border-black inline-block p-2 box-shadow-[4px_4px_0_#000]">
+                We break rules. We use too much contrast. We love it.
+            </p>
+        </div>
+
+        <!-- Sidebar / Image -->
+        <div class="col-span-1 md:col-span-4 flex flex-col gap-6">
+            <div class="neo-img-container h-full bg-black group relative">
+                <img src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=800"
+                    class="w-full h-full object-cover grayscale group-hover:grayscale-0" alt="Bold Portrait">
+            </div>
+            <div class="neo-box p-6 bg-[#00FFFF] text-center">
+                <h2 class="text-4xl mb-2">100%</h2>
+                <p class="font-bold text-sm">Satisfaction or we keep the money.</p>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- MARQUEE -->
+    <div class="marquee mb-12 font-bold text-3xl display-font">
+        <div class="marquee-content">
+            /// WARNING: HIGH CONTRAST AREA /// NO BLUR ALLOWED /// RAW PIXELS ONLY /// KEEP IT UGLY-PRETTY ///
+            /// WARNING: HIGH CONTRAST AREA /// NO BLUR ALLOWED /// RAW PIXELS ONLY /// KEEP IT UGLY-PRETTY ///
+        </div>
+    </div>
+
+    <!-- GALLERY GRID (Asymmetrical) -->
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+
+        <!-- Card 1 -->
+        <div class="col-span-1 neo-box p-0">
+            <div class="border-b-4 border-black p-4 bg-black text-white">
+                <h3 class="text-xl">Project_A</h3>
+            </div>
+            <div class="p-6">
+                <p class="mb-4 text-sm font-bold">This is a description of a project that is very bold.</p>
+                <div class="h-4 bg-gray-200 border-2 border-black mb-1 w-full relative overflow-hidden">
+                    <div class="absolute h-full bg-black w-[75%]"></div>
+                </div>
+                <span class="text-xs font-bold">Loading... 75%</span>
+                <div class="mt-4 flex justify-end">
+                    <button class="neo-btn px-4 py-2 bg-[#FAFF00] text-xs">View</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 2 (Wide) -->
+        <div class="col-span-1 md:col-span-2 neo-box p-0 relative group">
+            <div class="absolute top-4 right-4 bg-white border-2 border-black px-2 py-1 font-bold z-10 rotate-[5deg]">
+                NEW</div>
+            <div class="neo-img-container h-64 border-0 border-b-4 border-black">
+                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800"
+                    class="w-full h-full object-cover" alt="Abstract">
+            </div>
+            <div class="p-6 flex justify-between items-center bg-[#FF90E8]">
+                <h3 class="text-3xl">Abstract Chaos</h3>
+                <button class="neo-btn px-6 py-3 bg-white hover:bg-black hover:text-white rounded-full">Explore</button>
+            </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="col-span-1 md:col-span-2 neo-box p-8 bg-[#00FFFF] flex items-center justify-between">
+            <div>
+                <h2 class="text-5xl mb-2">LET'S TALK</h2>
+                <p class="font-bold bg-white inline-block px-1">hello@example.com</p>
+            </div>
+            <div class="text-6xl animate-bounce">
+                👇
+            </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div
+            class="col-span-1 neo-box p-6 bg-black text-white text-center flex flex-col justify-center items-center gap-4">
+            <div class="w-16 h-16 bg-white rounded-full border-4 border-[#FAFF00]"></div>
+            <p class="font-bold">"Ugly is the new beautiful."</p>
+            <button class="neo-btn bg-[#FAFF00] text-black w-full py-2 hover:bg-white">Agree</button>
+        </div>
+
+    </section>
+
+    <footer class="text-center font-bold text-sm mb-8">
+        <span class="bg-white border-2 border-black px-2 box-shadow-[2px_2px_0_#000]">&copy; 2025 NEO-BRUTALISM</span>
+    </footer>
+
+</body>
+
+</html>

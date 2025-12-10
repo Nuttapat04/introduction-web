@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Isometric City | CSS 3D</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --c1: #ef4444;
+            /* Red */
+            --c2: #3b82f6;
+            /* Blue */
+            --c3: #10b981;
+            /* Green */
+            --c4: #f59e0b;
+            /* Yellow */
+            --c5: #8b5cf6;
+            /* Purple */
+            --floor: #e2e8f0;
+        }
+
+        body {
+            background-color: #f1f5f9;
+            overflow: hidden;
+            height: 100vh;
+            perspective: 2000px;
+            /* Deep perspective for the tilt */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .world-container {
+            transform-style: preserve-3d;
+            transform: rotateX(55deg) rotateZ(45deg);
+            /* Standard Isometric-ish look */
+            transition: transform 0.1s ease-out;
+            width: 50vw;
+            height: 50vw;
+            /* Center the grid logic */
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        /* The Block */
+        .iso-block {
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+        }
+
+        .iso-block:hover {
+            transform: translateZ(50px);
+            /* Lift up */
+        }
+
+        /* Faces */
+        .face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            backface-visibility: hidden;
+            font-size: 2rem;
+            color: white;
+            font-weight: bold;
+            border-radius: 4px;
+        }
+
+        /* Top Face (The visible "card") */
+        .face--top {
+            transform: translateZ(20px);
+            background: var(--color);
+            box-shadow: inset 0 0 0 4px rgba(255, 255, 255, 0.1);
+        }
+
+        /* Side Faces for 3D extrusion/thickness looking */
+        .face--front {
+            transform: rotateX(-90deg) translateZ(calc(100% / 2 - 20px));
+            /* Approximation for CSS box model quirks */
+            height: 20px;
+            /* Thickness */
+            top: 100%;
+            transform-origin: top;
+            background: color-mix(in srgb, var(--color), black 20%);
+        }
+
+        .face--right {
+            transform: rotateY(90deg) translateZ(calc(100% / 2));
+            width: 20px;
+            /* Thickness */
+            left: 100%;
+            transform-origin: left;
+            background: color-mix(in srgb, var(--color), black 40%);
+            height: 100%;
+        }
+
+        /* Shadow beneath block */
+        .shadow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.2);
+            transform: translateZ(0px);
+            /* Floor level */
+            filter: blur(8px);
+            transition: all 0.4s ease;
+        }
+
+        .iso-block:hover .shadow {
+            transform: translateZ(-50px);
+            filter: blur(15px);
+            opacity: 0.1;
+        }
+
+        /* Staggered Heights (simulation) 
+           We actually just lift them on Z base
+        */
+
+        /* Floating Particles / Clouds */
+        .cloud {
+            position: absolute;
+            background: white;
+            opacity: 0.8;
+            filter: blur(2px);
+            border-radius: 50%;
+            transform: translateZ(100px) rotateX(-55deg) rotateZ(-45deg);
+            /* Face camera somewhat */
+            animation: float 10s infinite ease-in-out alternate;
+            pointer-events: none;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateZ(100px) translateX(0) rotateX(-55deg) rotateZ(-45deg);
+            }
+
+            100% {
+                transform: translateZ(120px) translateX(50px) rotateX(-55deg) rotateZ(-45deg);
+            }
+        }
+
+        /* UI Overlay */
+        .ui {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 100;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="ui">
+        <h1 class="text-4xl font-black text-slate-800 tracking-tight">ISO-CITY</h1>
+        <p class="text-slate-500 font-semibold">Interactive CSS 3D Map</p>
+    </div>
+
+    <!-- The Isometric World -->
+    <div class="world-container" id="world">
+        <!-- Grid Items GENERATED -->
+
+        <!-- Block 1 -->
+        <div class="iso-block" style="--color: var(--c1);">
+            <div class="shadow"></div>
+            <div class="face face--front"></div>
+            <div class="face face--right"></div>
+            <div class="face face--top">
+                <i class="fa-solid fa-fire"></i>
+            </div>
+        </div>
+
+        <!-- Block 2 -->
+        <div class="iso-block" style="--color: var(--c2);">
+            <div class="shadow"></div>
+            <div class="face face--front"></div>
+            <div class="face face--right"></div>
+            <div class="face face--top">
+                <i class="fa-solid fa-water"></i>
+            </div>
+        </div>
+
+        <!-- Block 3 -->
+        <div class="iso-block" style="--color: var(--c3);">
+            <div class="shadow"></div>
+            <div class="face face--front"></div>
+            <div class="face face--right"></div>
+            <div class="face face--top">
+                <i class="fa-solid fa-leaf"></i>
+            </div>
+        </div>
+
+        <!-- Block 4 -->
+        <div class="iso-block" style="--color: var(--c4);">
+            <div class="shadow"></div>
+            <div class="face face--front"></div>
+            <div class="face face--right"></div>
+            <div class="face face--top">
+                <i class="fa-solid fa-bolt"></i>
+            </div>
+        </div>
+
+        <!-- Block 5 -->
+        <div class="iso-block" style="--color: var(--c5);">
+            <div class="shadow"></div>
+            <div class="face face--front"></div>
+            <div class="face face--right"></div>
+            <div class="face face--top">
+                <i class="fa-solid fa-ghost"></i>
+            </div>
+        </div>
+
+        <!-- Filler Blocks -->
+        <div class="iso-block" style="--color: #cbd5e1;"> <!-- Concrete -->
+            <div class="shadow"></div>
+            <div class="face face--front"></div>
+            <div class="face face--right"></div>
+            <div class="face face--top"></div>
+        </div>
+        <div class="iso-block" style="--color: var(--c2);">
+            <div class="shadow"></div>
+            <div class="face face--front"></div>
+            <div class="face face--right"></div>
+            <div class="face face--top">
+                <i class="fa-solid fa-cloud"></i>
+            </div>
+        </div>
+        <div class="iso-block" style="--color: var(--c1);">
+            <div class="shadow"></div>
+            <div class="face face--front"></div>
+            <div class="face face--right"></div>
+            <div class="face face--top">
+                <i class="fa-solid fa-heart"></i>
+            </div>
+        </div>
+
+        <!-- More fillers for 4x4 -->
+        <div class="iso-block" style="--color: var(--c3);">
+            <div class="shadow"></div>
+            <div class="face face--front"></div>
+            <div class="face face--right"></div>
+            <div class="face face--top">
+                <i class="fa-solid fa-tree"></i>
+            </div>
+        </div>
+        <div class="iso-block" style="--color: #cbd5e1;">
+            <div class="shadow"></div>
+            <div class="face face--front"></div>
+            <div class="face face--right"></div>
+            <div class="face face--top"></div>
+        </div>
+        <div class="iso-block" style="--color: var(--c5);">
+            <div class="shadow"></div>
+            <div class="face face--front"></div>
+            <div class="face face--right"></div>
+            <div class="face face--top">
+                <i class="fa-solid fa-gamepad"></i>
+            </div>
+        </div>
+        <div class="iso-block" style="--color: var(--c4);">
+            <div class="shadow"></div>
+            <div class="face face--front"></div>
+            <div class="face face--right"></div>
+            <div class="face face--top">
+                <i class="fa-solid fa-star"></i>
+            </div>
+        </div>
+
+        <div class="iso-block" style="--color: var(--c1);">
+            <div class="shadow"></div>
+            <div class="face face--front"></div>
+            <div class="face face--right"></div>
+            <div class="face face--top">
+                <i class="fa-solid fa-rocket"></i>
+            </div>
+        </div>
+        <div class="iso-block" style="--color: #cbd5e1;">
+            <div class="shadow"></div>
+            <div class="face face--front"></div>
+            <div class="face face--right"></div>
+            <div class="face face--top"></div>
+        </div>
+        <div class="iso-block" style="--color: var(--c2);">
+            <div class="shadow"></div>
+            <div class="face face--front"></div>
+            <div class="face face--right"></div>
+            <div class="face face--top">
+                <i class="fa-solid fa-anchor"></i>
+            </div>
+        </div>
+        <div class="iso-block" style="--color: var(--c3);">
+            <div class="shadow"></div>
+            <div class="face face--front"></div>
+            <div class="face face--right"></div>
+            <div class="face face--top">
+                <i class="fa-solid fa-mountain"></i>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Decorative Cloud -->
+    <div class="cloud" style="width: 100px; height: 60px; top: 10%; left: 10%;"></div>
+    <div class="cloud" style="width: 150px; height: 90px; top: 20%; right: 20%; animation-delay: -2s;"></div>
+
+    <script>
+        const body = document.querySelector('body');
+        const world = document.getElementById('world');
+
+        // Mouse Pan Effect
+        window.addEventListener('mousemove', (e) => {
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+
+            // Base Rotation: 55deg X, 45deg Z
+            // We want to slightly tweak X and Z based on mouse
+            // Range: +/- 10 degrees?
+
+            const rotateX = 55 + (y - 0.5) * 10;
+            const rotateZ = 45 + (x - 0.5) * 10;
+
+            // Also optional translate to "pan"
+            // const transX = (x - 0.5) * 50; 
+
+            world.style.transform = `rotateX(${rotateX}deg) rotateZ(${rotateZ}deg)`;
+        });
+
+        // Click interaction for blocks
+        const blocks = document.querySelectorAll('.iso-block');
+        blocks.forEach(block => {
+            block.addEventListener('click', () => {
+                // Example interaction
+                block.style.transform = "translateZ(100px) rotateZ(360deg)";
+                setTimeout(() => {
+                    block.style.transform = "";
+                }, 1000);
+            });
+        });
+    </script>
+</body>
+
+</html>

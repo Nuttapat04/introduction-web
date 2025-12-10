@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OmniVerse | Portfolio Collection</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Playfair+Display:ital,wght@1,400&display=swap"
+        rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #050505;
+            color: #fff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, #fff, #999);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Card Hover Effects */
+        .project-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 40px -10px rgba(255, 255, 255, 0.1);
+        }
+
+        .project-image {
+            transition: transform 0.6s ease;
+        }
+
+        .project-card:hover .project-image {
+            transform: scale(1.05);
+        }
+
+        .tag {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 0.2rem 0.5rem;
+            border-radius: 99px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Category Tabs */
+        .tab-btn {
+            padding: 0.5rem 1.5rem;
+            border-radius: 99px;
+            transition: all 0.3s;
+            border: 1px solid transparent;
+            color: #666;
+        }
+
+        .tab-btn.active {
+            background: white;
+            color: black;
+        }
+
+        .tab-btn:hover:not(.active) {
+            color: white;
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+
+<body class="selection:bg-white selection:text-black">
+
+    <!-- Header -->
+    <header class="py-20 px-6 md:px-12 max-w-7xl mx-auto border-b border-white/10">
+        <h1 class="text-xs uppercase tracking-[0.3em] text-gray-500 mb-6">Master Collection</h1>
+        <div class="flex flex-col md:flex-row justify-between items-end gap-8">
+            <h2 class="text-5xl md:text-7xl font-bold tracking-tight text-white max-w-2xl">
+                The <span class="font-serif italic text-gray-400">Art</span> of <br> Interactive Web.
+            </h2>
+            <p class="text-gray-400 max-w-md text-sm leading-relaxed text-right md:text-left">
+                A curated archive of experimental landing pages, portfolio designs, and WebGL interactions.
+                Explore the boundaries of modern frontend development.
+            </p>
+        </div>
+    </header>
+
+    <!-- Content -->
+    <main class="max-w-7xl mx-auto px-6 md:px-12 py-16">
+
+        <!-- Filters (Visual only for now, could be functional JS) -->
+        <div class="flex flex-wrap gap-4 mb-16 justify-center md:justify-start">
+            <button class="tab-btn active">All Projects</button>
+            <button class="tab-btn">Immersive 3D</button>
+            <button class="tab-btn">Typography</button>
+            <button class="tab-btn">Experimental</button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            <!-- 1. CREATIVE PORTFOLIO (3D SPHERE) -->
+            <a href="creative_portfolio.html" class="project-card group bg-white/5 rounded-2xl overflow-hidden block">
+                <div class="h-64 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800"
+                        class="project-image w-full h-full object-cover" alt="Creative">
+                    <div class="absolute inset-0 bg-black/50 group-hover:bg-black/20 transition-colors"></div>
+                    <div class="absolute bottom-4 left-4">
+                        <span class="tag bg-blue-500/20 text-blue-300 border-blue-500/30">Most Popular</span>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-baseline mb-2">
+                        <h3 class="text-xl font-bold text-white group-hover:underline decoration-1 underline-offset-4">
+                            Creative Portfolio</h3>
+                        <span class="text-xs text-gray-500">v1.0</span>
+                    </div>
+                    <p class="text-sm text-gray-400 mb-4 line-clamp-2">The original dark-mode luxury portfolio. Features
+                        a 3D interactive particle sphere, tilt-card effects, and typewriter interactions.</p>
+                    <div class="flex gap-2">
+                        <span class="tag">Three.js</span>
+                        <span class="tag">Particles</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- 2. AURORA GLASS V2 -->
+            <a href="aurora_glass.html" class="project-card group bg-white/5 rounded-2xl overflow-hidden block">
+                <div class="h-64 overflow-hidden relative">
+                    <div class="absolute inset-0 bg-gradient-to-br from-pink-500/20 to-violet-500/20"></div>
+                    <img src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=800"
+                        class="project-image w-full h-full object-cover opacity-80" alt="Aurora">
+                    <div class="absolute bottom-4 left-4">
+                        <span class="tag bg-pink-500/20 text-pink-300 border-pink-500/30">Awwwards Style</span>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-baseline mb-2">
+                        <h3 class="text-xl font-bold text-white group-hover:underline">Aurora Glass V2</h3>
+                        <span class="text-xs text-gray-500">v2.0</span>
+                    </div>
+                    <p class="text-sm text-gray-400 mb-4">Refined glassmorphism with advanced CSS mesh gradients, gentle
+                        floating animations, and premium typography.</p>
+                    <div class="flex gap-2">
+                        <span class="tag">GSAP</span>
+                        <span class="tag">Mesh Gradient</span>
+                    </div>
+                </div>
+            </a>
+
+
+
+            <!-- 4. Y2K AESTHETIC -->
+            <a href="y2k_aesthetic.html" class="project-card group bg-white/5 rounded-2xl overflow-hidden block">
+                <div class="h-64 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?q=80&w=800"
+                        class="project-image w-full h-full object-cover grayscale contrast-125" alt="Y2K">
+                    <div class="absolute bottom-4 left-4">
+                        <span class="tag bg-cyan-500/20 text-cyan-300 border-cyan-500/30">Trendy</span>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-baseline mb-2">
+                        <h3 class="text-xl font-bold text-white group-hover:underline">Y2K Chrome</h3>
+                        <span class="text-xs text-gray-500">Theme</span>
+                    </div>
+                    <p class="text-sm text-gray-400 mb-4">Retro-futuristic 2000s aesthetic. Liquid chrome 3D shapes,
+                        holographic text, and scrolling tickers.</p>
+                    <div class="flex gap-2">
+                        <span class="tag">Chrome</span>
+                        <span class="tag">Retro</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- 5. KINETIC TYPOGRAPHY -->
+            <a href="kinetic_typography.html" class="project-card group bg-white/5 rounded-2xl overflow-hidden block">
+                <div class="h-64 overflow-hidden relative bg-white text-black flex items-center justify-center">
+                    <h1 class="text-6xl font-black uppercase tracking-tighter"
+                        style="font-family: 'Oswald', sans-serif">TYPE</h1>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-baseline mb-2">
+                        <h3 class="text-xl font-bold text-white group-hover:underline">Kinetic Typography</h3>
+                        <span class="text-xs text-gray-500">Scroll</span>
+                    </div>
+                    <p class="text-sm text-gray-400 mb-4">Massive scale text that skews based on scroll velocity.
+                        featuring infinite marquees and bold layout interactions.</p>
+                    <div class="flex gap-2">
+                        <span class="tag">ScrollTrigger</span>
+                        <span class="tag">Velocity</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- 6. NEO-BRUTALISM -->
+            <a href="neo_brutalism.html"
+                class="project-card group bg-[#FAFF00] rounded-2xl overflow-hidden block border-2 border-black !shadow-[4px_4px_0_white]">
+                <div class="h-64 overflow-hidden relative border-b-2 border-black flex items-center justify-center">
+                    <span class="text-4xl font-black text-black">UGLY/BOLD</span>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-baseline mb-2">
+                        <h3 class="text-xl font-bold text-black group-hover:underline">Neo-Brutalism</h3>
+                        <span class="text-xs text-black font-bold">Raw</span>
+                    </div>
+                    <p class="text-sm text-black mb-4 font-bold">High contrast, hard shadows, thick borders. A raw and
+                        unpolished aesthetic with physical button interactions.</p>
+                    <div class="flex gap-2">
+                        <span class="tag !border-black !text-black !bg-white">Trend</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- 7. SCROLLYTELLING -->
+            <a href="scrollytelling.html" class="project-card group bg-white/5 rounded-2xl overflow-hidden block">
+                <div class="h-64 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=800"
+                        class="project-image w-full h-full object-cover" alt="Story">
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-baseline mb-2">
+                        <h3 class="text-xl font-bold text-white group-hover:underline">Scrollytelling</h3>
+                        <span class="text-xs text-gray-500">Narrative</span>
+                    </div>
+                    <p class="text-sm text-gray-400 mb-4">A split-screen narrative experience where visuals are pinned
+                        and update dynamically as you scroll through the story.</p>
+                    <div class="flex gap-2">
+                        <span class="tag">Pinning</span>
+                        <span class="tag">Story</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- 8. ISOMETRIC CITY -->
+            <a href="isometric_city.html" class="project-card group bg-white/5 rounded-2xl overflow-hidden block">
+                <div class="h-64 overflow-hidden relative bg-[#f1f5f9] flex items-center justify-center">
+                    <div class="w-20 h-20 bg-blue-500 transform rotate-45 rotate-x-12 shadow-xl border-4 border-white">
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-baseline mb-2">
+                        <h3 class="text-xl font-bold text-white group-hover:underline">Isometric City</h3>
+                        <span class="text-xs text-gray-500">CSS 3D</span>
+                    </div>
+                    <p class="text-sm text-gray-400 mb-4">Playful 3D isometric grid built entirely with CSS transforms.
+                        Features hovering blocks and perspective tilting.</p>
+                    <div class="flex gap-2">
+                        <span class="tag">CSS 3D</span>
+                        <span class="tag">Playful</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- 9. 3D PARTICLE SYSTEM -->
+            <a href="particle_portfolio.html" class="project-card group bg-white/5 rounded-2xl overflow-hidden block">
+                <div class="h-64 overflow-hidden relative bg-[#050510] flex items-center justify-center">
+                    <div class="w-32 h-32 rounded-full border-4 border-dotted border-blue-500/50 animate-spin-slow">
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-baseline mb-2">
+                        <h3 class="text-xl font-bold text-white group-hover:underline">Particle Nebula</h3>
+                        <span class="text-xs text-gray-500">Three.js</span>
+                    </div>
+                    <p class="text-sm text-gray-400 mb-4">Interactive 3D particle sphere. Particles explode on hover and
+                        the camera zooms in on scroll.</p>
+                    <div class="flex gap-2">
+                        <span class="tag">Particles</span>
+                        <span class="tag">Space</span>
+                    </div>
+                </div>
+            </a>
+
+
+
+            <!-- 11. LIQUID RIPPLE -->
+            <a href="liquid_ripple.html" class="project-card group bg-white/5 rounded-2xl overflow-hidden block">
+                <div class="h-64 overflow-hidden relative bg-black">
+                    <div
+                        class="w-full h-full opacity-50 bg-[url('https://images.unsplash.com/photo-1541701494587-cb58502866ab?q=80&w=400')] bg-cover">
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-baseline mb-2">
+                        <h3 class="text-xl font-bold text-white group-hover:underline">Water Ripple</h3>
+                        <span class="text-xs text-gray-500">Shader</span>
+                    </div>
+                    <p class="text-sm text-gray-400 mb-4">A custom fragmentation shader creating realistic water ripples
+                        over an image on mouse movement.</p>
+                    <div class="flex gap-2">
+                        <span class="tag">Shader</span>
+                        <span class="tag">Water</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- 12. BENTO MINIMAL -->
+            <a href="bento_portfolio.html"
+                class="project-card group bg-white text-black rounded-2xl overflow-hidden block border-none">
+                <div class="h-64 overflow-hidden relative flex items-center justify-center bg-gray-50">
+                    <div class="grid grid-cols-2 gap-2 w-32 h-32 opacity-50">
+                        <div class="bg-black rounded-lg"></div>
+                        <div class="bg-gray-400 rounded-lg"></div>
+                        <div class="bg-gray-300 rounded-lg col-span-2"></div>
+                    </div>
+                </div>
+                <div class="p-6 border-t border-gray-200">
+                    <div class="flex justify-between items-baseline mb-2">
+                        <h3 class="text-xl font-bold text-black group-hover:underline">Bento Portfolio</h3>
+                        <span class="text-xs text-gray-500">Bento</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-4">The original Bento Grid portfolio. Dark mode, 3D sphere, and
+                        glassmorphism cards. "Same as before".</p>
+                    <div class="flex gap-2">
+                        <span class="tag !border-gray-200 !text-black !bg-gray-100">Bento</span>
+                        <span class="tag !border-gray-200 !text-black !bg-gray-100">3D</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- 13. AURORA LANDING (ORIGINAL) -->
+            <a href="aurora_landing.html"
+                class="project-card group bg-white/5 rounded-2xl overflow-hidden block opacity-50 hover:opacity-100">
+                <div class="h-64 bg-slate-900 flex items-center justify-center">
+                    <span class="text-white/50 font-mono">Archive V1</span>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-baseline mb-2">
+                        <h3 class="text-xl font-bold text-white group-hover:underline">Aurora (V1)</h3>
+                        <span class="text-xs text-gray-500">Archive</span>
+                    </div>
+                    <p class="text-sm text-gray-400 mb-4">The first iteration of the Aurora concept. Features simple
+                        gradients and glass cards. (See V2 for updated look).</p>
+                    <div class="flex gap-2">
+                        <span class="tag">Archive</span>
+                    </div>
+                </div>
+            </a>
+
+        </div>
+
+    </main>
+
+    <footer class="py-12 border-t border-white/10 text-center text-gray-600 text-xs uppercase tracking-widest">
+        <p>&copy; 2025 OmniVerse Studios. All Concept Designs.</p>
+    </footer>
+
+</body>
+
+</html>

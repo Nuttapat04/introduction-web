@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuttapat | Digital Alchemy</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Manrope:wght@300;400;600;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['Italiana', 'serif'],
+                        sans: ['Manrope', 'sans-serif'],
+                    },
+                    colors: {
+                        glass: 'rgba(255, 255, 255, 0.05)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            margin: 0;
+            overflow-x: hidden;
+            background: #000;
+            color: white;
+            cursor: none;
+            /* Custom cursor */
+        }
+
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+        }
+
+        /* Lenis */
+        html.lenis {
+            height: auto;
+        }
+
+        .lenis.lenis-smooth {
+            scroll-behavior: auto !important;
+        }
+
+        .lenis.lenis-smooth [data-lenis-prevent] {
+            overscroll-behavior: contain;
+        }
+
+        .lenis.lenis-stopped {
+            overflow: hidden;
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            pointer-events: none;
+            mix-blend-mode: difference;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s;
+        }
+
+        .cursor.active {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 1);
+        }
+
+        /* Kinetic Typography */
+        .kinetic-text {
+            display: inline-block;
+            transform-origin: center;
+            will-change: transform;
+        }
+
+        /* Glassmorphism */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: background 0.3s;
+        }
+
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+
+<body class="antialiased font-sans">
+
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+
+    <!-- WebGL Background -->
+    <div id="canvas-container"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full p-8 z-50 flex justify-between items-center mix-blend-difference">
+        <a href="#" class="text-xl font-bold tracking-widest hover-trigger">AV. ALCHEMY</a>
+        <div class="hidden md:flex gap-8 text-xs font-bold tracking-[0.2em] uppercase">
+            <a href="#about" class="hover:opacity-50 hover-trigger">About</a>
+            <a href="#projects" class="hover:opacity-50 hover-trigger">Projects</a>
+            <a href="#contact" class="hover:opacity-50 hover-trigger">Contact</a>
+        </div>
+    </nav>
+
+    <!-- CONTENT -->
+    <div class="relative z-10">
+
+        <!-- SECTION 1: HERO (Silver) -->
+        <section id="hero" class="min-h-screen flex flex-col justify-center items-center px-6 text-center"
+            data-color="#E0E0E0">
+            <h1 class="font-serif text-[15vw] leading-[0.85] mix-blend-overlay opacity-90 kinetic-text">
+                DIGITAL
+            </h1>
+            <h1 class="font-serif text-[15vw] leading-[0.85] mix-blend-overlay opacity-90 kinetic-text">
+                ALCHEMY
+            </h1>
+            <p
+                class="mt-12 text-sm md:text-base font-sans tracking-[0.3em] uppercase max-w-md mx-auto opacity-80 leading-relaxed">
+                Alexander Void <br>
+                Creative Technologist • 3D Artist
+            </p>
+        </section>
+
+        <!-- SECTION 2: ABOUT (Gold Transition) -->
+        <section id="about" class="min-h-screen flex items-center justify-center px-6 md:px-24 py-24"
+            data-color="#FFD700">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center w-full max-w-7xl">
+                <div class="space-y-8">
+                    <h2 class="font-serif text-6xl md:text-8xl mix-blend-overlay kinetic-text">
+                        THE<br>FUSION
+                    </h2>
+                    <div class="w-24 h-[1px] bg-white opacity-50"></div>
+                </div>
+                <div class="glass-card p-10 rounded-2xl hover-trigger">
+                    <p class="text-lg md:text-xl leading-relaxed text-gray-200">
+                        I blend the rigidity of <strong class="text-white">Code</strong> with the fluidity of <strong
+                            class="text-white">Art</strong>.
+                        <br><br>
+                        Exploring the boundaries between physical and digital spaces.
+                        Crafting immersive experiences that challenge perception.
+                    </p>
+                    <div class="mt-8 flex flex-wrap gap-3">
+                        <span
+                            class="px-3 py-1 border border-white/20 rounded-full text-xs uppercase tracking-widest">WebGL</span>
+                        <span
+                            class="px-3 py-1 border border-white/20 rounded-full text-xs uppercase tracking-widest">GLSL
+                            Shaders</span>
+                        <span
+                            class="px-3 py-1 border border-white/20 rounded-full text-xs uppercase tracking-widest">Creative
+                            Dev</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: PROJECTS (Iridescent Transition) -->
+        <section id="projects" class="min-h-screen flex flex-col justify-center px-6 md:px-24 py-24"
+            data-color="#00FFFF">
+            <h2 class="font-serif text-[10vw] mb-24 mix-blend-overlay kinetic-text self-start">
+                SELECTED WORKS
+            </h2>
+
+            <div class="space-y-32">
+                <!-- Project 1 -->
+                <div class="group flex flex-col md:flex-row gap-8 items-center hover-trigger">
+                    <div class="w-full md:w-1/2 overflow-hidden rounded-lg">
+                        <div
+                            class="w-full h-[300px] md:h-[400px] bg-gray-800 relative overflow-hidden group-hover:scale-95 transition-transform duration-700">
+                            <!-- Placeholder for project image -->
+                            <img src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=1000"
+                                class="w-full h-full object-cover opacity-60 hover:opacity-100 transition-opacity duration-500">
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2 md:pl-12">
+                        <h3 class="font-serif text-4xl md:text-6xl mb-4">Neon Genesis</h3>
+                        <p class="text-xs font-bold tracking-widest uppercase mb-6 opacity-60">Interactive • WebGL •
+                            Audio</p>
+                        <p class="text-gray-300 leading-relaxed max-w-md">
+                            A generative audio-visual experience exploring the relationship between sound frequencies
+                            and light refraction.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="group flex flex-col md:flex-row-reverse gap-8 items-center hover-trigger">
+                    <div class="w-full md:w-1/2 overflow-hidden rounded-lg">
+                        <div
+                            class="w-full h-[300px] md:h-[400px] bg-gray-800 relative overflow-hidden group-hover:scale-95 transition-transform duration-700">
+                            <img src="https://images.unsplash.com/photo-1558494949-ef526b0042a0?q=80&w=1000"
+                                class="w-full h-full object-cover opacity-60 hover:opacity-100 transition-opacity duration-500">
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2 md:pr-12 text-right">
+                        <h3 class="font-serif text-4xl md:text-6xl mb-4">Void Walker</h3>
+                        <p class="text-xs font-bold tracking-widest uppercase mb-6 opacity-60">Immersive • VR • Unreal 5
+                        </p>
+                        <p class="text-gray-300 leading-relaxed max-w-md ml-auto">
+                            An ethereal journey through impossible geometries and non-euclidean spaces.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: CONTACT -->
+        <section id="contact" class="min-h-[50vh] flex flex-col justify-center items-center py-24" data-color="#E0E0E0">
+            <p class="text-xs tracking-[0.5em] uppercase mb-8">Ready to Initiate?</p>
+            <a href="mailto:hello@alchemy.com"
+                class="font-serif text-[8vw] hover:opacity-50 transition-opacity hover-trigger kinetic-text">
+                HELLO@ALCHEMY.COM
+            </a>
+            <div class="flex gap-12 mt-16 text-xs font-bold tracking-[0.2em] uppercase">
+                <a href="#" class="hover-trigger hover:underline">LinkedIn</a>
+                <a href="#" class="hover-trigger hover:underline">GitHub</a>
+                <a href="#" class="hover-trigger hover:underline">Resume</a>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+
+    <!-- Liquid Chrome Shader -->
+    <script id="vertexShader" type="x-shader/x-vertex">
+        varying vec2 vUv;
+        void main() {
+            vUv = uv;
+            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        }
+    </script>
+
+    <script id="fragmentShader" type="x-shader/x-fragment">
+        uniform float uTime;
+        uniform vec2 uMouse;
+        uniform vec3 uColor;
+        varying vec2 vUv;
+
+        // Noise functions
+        vec3 mod289(vec3 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
+        vec2 mod289(vec2 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
+        vec3 permute(vec3 x) { return mod289(((x*34.0)+1.0)*x); }
+
+        float snoise(vec2 v) {
+            const vec4 C = vec4(0.211324865405187, 0.366025403784439, -0.577350269189626, 0.024390243902439);
+            vec2 i  = floor(v + dot(v, C.yy) );
+            vec2 x0 = v - i + dot(i, C.xx);
+            vec2 i1;
+            i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
+            vec4 x12 = x0.xyxy + C.xxzz;
+            x12.xy -= i1;
+            i = mod289(i);
+            vec3 p = permute( permute( i.y + vec3(0.0, i1.y, 1.0 )) + i.x + vec3(0.0, i1.x, 1.0 ));
+            vec3 m = max(0.5 - vec3(dot(x0,x0), dot(x12.xy,x12.xy), dot(x12.zw,x12.zw)), 0.0);
+            m = m*m ;
+            m = m*m ;
+            vec3 x = 2.0 * fract(p * C.www) - 1.0;
+            vec3 h = abs(x) - 0.5;
+            vec3 ox = floor(x + 0.5);
+            vec3 a0 = x - ox;
+            m *= 1.79284291400159 - 0.85373472095314 * ( a0*a0 + h*h );
+            vec3 g;
+            g.x  = a0.x  * x0.x  + h.x  * x0.y;
+            g.yz = a0.yz * x12.xz + h.yz * x12.yw;
+            return 130.0 * dot(m, g);
+        }
+
+        void main() {
+            vec2 uv = vUv;
+            
+            // Mouse Interaction
+            float dist = distance(uv, uMouse);
+            float mouseEffect = smoothstep(0.4, 0.0, dist) * 0.5;
+
+            // Liquid Noise
+            float noise1 = snoise(uv * 3.0 + uTime * 0.2 + mouseEffect);
+            float noise2 = snoise(uv * 6.0 - uTime * 0.1);
+            
+            // Combine for "Liquid Metal" look
+            float liquid = noise1 * 0.5 + noise2 * 0.5;
+            
+            // Create chrome-like banding
+            float grain = liquid * 10.0;
+            float metal = sin(grain + uTime);
+            
+            // Mix with target color
+            vec3 color = mix(vec3(0.5), uColor, 0.5); // Base grey + tint
+            color += metal * 0.3; // Add shine
+            
+            // High contrast for metallic feel
+            color = pow(color, vec3(1.5)); 
+
+            gl_FragColor = vec4(color, 1.0);
+        }
+    </script>
+
+    <script>
+        // --- 1. LENIS SMOOTH SCROLL ---
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            direction: 'vertical',
+            smooth: true,
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+
+        // --- 2. THREE.JS LIQUID BACKGROUND ---
+        const container = document.getElementById('canvas-container');
+        const scene = new THREE.Scene();
+        const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1); // Fullscreen quad setup
+        const renderer = new THREE.WebGLRenderer({ alpha: true });
+
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        container.appendChild(renderer.domElement);
+
+        const geometry = new THREE.PlaneGeometry(2, 2);
+        const material = new THREE.ShaderMaterial({
+            vertexShader: document.getElementById('vertexShader').textContent,
+            fragmentShader: document.getElementById('fragmentShader').textContent,
+            uniforms: {
+                uTime: { value: 0 },
+                uMouse: { value: new THREE.Vector2(0.5, 0.5) },
+                uColor: { value: new THREE.Color('#E0E0E0') } // Initial Silver
+            }
+        });
+
+        const plane = new THREE.Mesh(geometry, material);
+        scene.add(plane);
+
+        // Mouse Tracking (Normalized)
+        const mouse = new THREE.Vector2(0.5, 0.5);
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.clientX / window.innerWidth;
+            mouse.y = 1.0 - (e.clientY / window.innerHeight);
+        });
+
+        const clock = new THREE.Clock();
+        function animate() {
+            // Smooth mouse follow
+            material.uniforms.uMouse.value.lerp(mouse, 0.05);
+            material.uniforms.uTime.value = clock.getElapsedTime();
+            renderer.render(scene, camera);
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        // Resize
+        window.addEventListener('resize', () => {
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+
+        // --- 3. GSAP SCROLLTELLING (Color Shifts) ---
+        gsap.registerPlugin(ScrollTrigger);
+
+        const sections = document.querySelectorAll('section');
+
+        sections.forEach(section => {
+            const color = section.getAttribute('data-color');
+
+            ScrollTrigger.create({
+                trigger: section,
+                start: "top center",
+                end: "bottom center",
+                onEnter: () => updateLiquidColor(color),
+                onEnterBack: () => updateLiquidColor(color),
+            });
+        });
+
+        function updateLiquidColor(hex) {
+            gsap.to(material.uniforms.uColor.value, {
+                r: new THREE.Color(hex).r,
+                g: new THREE.Color(hex).g,
+                b: new THREE.Color(hex).b,
+                duration: 1.5,
+                ease: "power2.out"
+            });
+        }
+
+
+        // --- 4. KINETIC TYPOGRAPHY (Skew) ---
+        // Skew text based on scroll velocity
+        let proxy = { skew: 0 },
+            skewSetter = gsap.quickSetter(".kinetic-text", "skewX", "deg"),
+            clamp = gsap.utils.clamp(-20, 20);
+
+        ScrollTrigger.create({
+            onUpdate: (self) => {
+                let skew = clamp(self.getVelocity() / -300);
+                if (Math.abs(skew) > Math.abs(proxy.skew)) {
+                    proxy.skew = skew;
+                    gsap.to(proxy, {
+                        skew: 0,
+                        duration: 0.8,
+                        ease: "power3",
+                        overwrite: true,
+                        onUpdate: () => skewSetter(proxy.skew)
+                    });
+                }
+            }
+        });
+
+
+        // --- 5. CUSTOM CURSOR ---
+        const cursor = document.querySelector('.cursor');
+        const triggers = document.querySelectorAll('.hover-trigger');
+
+        window.addEventListener('mousemove', (e) => {
+            gsap.to(cursor, {
+                x: e.clientX,
+                y: e.clientY,
+                duration: 0.1
+            });
+        });
+
+        triggers.forEach(trigger => {
+            trigger.addEventListener('mouseenter', () => cursor.classList.add('active'));
+            trigger.addEventListener('mouseleave', () => cursor.classList.remove('active'));
+        });
+
+    </script>
+</body>
+
+</html>

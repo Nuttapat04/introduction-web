@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chronicle | Scrollytelling</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Cormorant Garamond', serif;
+            color: #1a1a1a;
+            overflow-x: hidden;
+            background-color: #F3F4F6;
+            /* Initial BG */
+            transition: background-color 0.8s ease;
+        }
+
+        .sans {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* UTILS */
+        .vh-100 {
+            height: 100vh;
+        }
+
+        .min-vh-100 {
+            min-height: 100vh;
+        }
+
+        .chapter-card {
+            opacity: 0.3;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        .chapter-card.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Pinned Image Container */
+        .right-panel {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .visual-container {
+            width: 100%;
+            height: 80%;
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .visual-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out, transform 1.2s ease-out;
+            transform: scale(1.1);
+        }
+
+        .visual-img.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Parallax Elements */
+        .floating-shape {
+            position: absolute;
+            z-index: -1;
+            border-radius: 50%;
+            filter: blur(40px);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAV -->
+    <nav class="fixed top-0 w-full p-8 flex justify-between items-center z-50 mix-blend-difference text-white">
+        <div class="text-xl font-bold tracking-widest uppercase sans">Chronicle.</div>
+        <div class="hidden md:block text-xs uppercase tracking-widest sans opacity-70">Chapter 01 / Origins</div>
+    </nav>
+
+    <!-- INTRO -->
+    <section class="vh-100 flex flex-col items-center justify-center text-center relative pointer-events-none">
+        <h1 class="text-7xl md:text-9xl font-light mb-4 text-slate-800">The Journey</h1>
+        <p class="text-xl md:text-2xl italic opacity-60 max-w-lg">A visual exploration of time and space.</p>
+        <div class="absolute bottom-10 animate-bounce sans text-xs uppercase tracking-widest">Scroll to Begin</div>
+    </section>
+
+    <!-- MAIN SCROLLY CONTAINER -->
+    <div class="flex flex-col md:flex-row relative" id="main-container">
+
+        <!-- RIGHT PANEL (PINNED STICKY) -->
+        <!-- Order-2 on mobile (below text), Order-last on desktop (right side) -->
+        <div class="w-full md:w-1/2 p-8 md:p-12 right-panel order-1 md:order-2">
+            <div class="visual-container">
+                <!-- Image 1 -->
+                <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=1000"
+                    class="visual-img active" id="img-1" alt="Nature">
+                <!-- Image 2 -->
+                <img src="https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?q=80&w=1000" class="visual-img"
+                    id="img-2" alt="Urban">
+                <!-- Image 3 -->
+                <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1000" class="visual-img"
+                    id="img-3" alt="Space">
+            </div>
+
+            <!-- Floaties -->
+            <div class="floating-shape bg-teal-400 w-64 h-64 top-20 right-20 opacity-20" data-speed="0.5"></div>
+        </div>
+
+        <!-- LEFT PANEL (SCROLLING TEXT) -->
+        <div class="w-full md:w-1/2 left-panel order-2 md:order-1 relative z-10">
+
+            <!-- SECTION 1 -->
+            <section class="min-vh-100 flex items-center justify-center p-8 md:p-24" data-color="#F3F4F6">
+                <div class="chapter-card max-w-md">
+                    <span class="text-sm font-bold uppercase sans tracking-widest text-teal-600 mb-4 block">Chapter
+                        I</span>
+                    <h2 class="text-5xl md:text-6xl mb-6">The Beginning</h2>
+                    <p class="text-lg leading-relaxed opacity-80 sans font-light">
+                        It started with a single step into the unknown. The air was crisp, filled with the scent of pine
+                        and morning dew.
+                        We walked for miles, leaving nothing but footprints behind.
+                    </p>
+                </div>
+            </section>
+
+            <!-- SECTION 2 -->
+            <section class="min-vh-100 flex items-center justify-center p-8 md:p-24" data-color="#E2E8F0">
+                <div class="chapter-card max-w-md">
+                    <span class="text-sm font-bold uppercase sans tracking-widest text-indigo-600 mb-4 block">Chapter
+                        II</span>
+                    <h2 class="text-5xl md:text-6xl mb-6">Urban Decay</h2>
+                    <p class="text-lg leading-relaxed opacity-80 sans font-light">
+                        As we approached the city, the silence was replaced by the hum of machinery.
+                        Concrete structures rose like giants against the grey sky, telling stories of a forgotten
+                        industrial era.
+                    </p>
+                </div>
+            </section>
+
+            <!-- SECTION 3 -->
+            <section class="min-vh-100 flex items-center justify-center p-8 md:p-24" data-color="#0F172A">
+                <div class="chapter-card max-w-md text-white"> <!-- Dark Mode Text -->
+                    <span class="text-sm font-bold uppercase sans tracking-widest text-purple-400 mb-4 block">Chapter
+                        III</span>
+                    <h2 class="text-5xl md:text-6xl mb-6">Into the Void</h2>
+                    <p class="text-lg leading-relaxed opacity-80 sans font-light text-gray-300">
+                        Leaving the world behind, we looked up. The stars whispered secrets of infinity.
+                        We realized we were just tiny specks in a vast, beautiful cosmic dance.
+                    </p>
+                    <button
+                        class="mt-8 border border-white px-8 py-3 rounded-full sans text-xs uppercase tracking-widest hover:bg-white hover:text-black transition-colors">
+                        Explore More
+                    </button>
+                </div>
+            </section>
+
+        </div>
+
+    </div>
+
+    <!-- OUTRO -->
+    <footer class="py-24 text-center bg-black text-white relative z-20">
+        <h2 class="text-4xl sans font-light mb-4">The End.</h2>
+        <p class="text-xs sans opacity-50 uppercase tracking-widest">&copy; 2025 Storyteller Inc.</p>
+    </footer>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // 1. Pinning Strategy
+        // We pin the .right-panel while the .left-panel scrolls
+        ScrollTrigger.create({
+            trigger: "#main-container",
+            start: "top top",
+            end: "bottom bottom",
+            pin: ".right-panel",
+            // In a flex row, pinning one side might require ensuring the parent has height. 
+            // Better approach for side-by-side pinning:
+            // Since structure is Flex Row, we can use "pin" on the right panel element
+            // But 'end' needs to match the height of the scrolling content.
+        });
+
+        // 2. Section Animations & Logic
+        const sections = document.querySelectorAll('.left-panel section');
+        const images = document.querySelectorAll('.visual-img');
+        const body = document.body;
+
+        sections.forEach((section, index) => {
+
+            // Text Fade In
+            const card = section.querySelector('.chapter-card');
+
+            ScrollTrigger.create({
+                trigger: section,
+                start: "top 60%",
+                end: "bottom 60%",
+                onEnter: () => {
+                    // Activate Text
+                    card.classList.add('active');
+
+                    // Change Background
+                    const newColor = section.dataset.color;
+                    gsap.to(body, { backgroundColor: newColor, duration: 0.8 });
+
+                    // Change Image
+                    images.forEach(img => img.classList.remove('active'));
+                    if (images[index]) images[index].classList.add('active');
+                },
+                onEnterBack: () => {
+                    // Re-Activate Text when scrolling up
+                    card.classList.add('active');
+
+                    // Revert Background
+                    const newColor = section.dataset.color;
+                    gsap.to(body, { backgroundColor: newColor, duration: 0.8 });
+
+                    // Revert Image
+                    images.forEach(img => img.classList.remove('active'));
+                    if (images[index]) images[index].classList.add('active');
+                },
+                onLeave: () => {
+                    // card.classList.remove('active'); // Optional: fade out when leaving
+                },
+                onLeaveBack: () => {
+                    card.classList.remove('active');
+                }
+            });
+        });
+
+        // 3. Parallax
+        gsap.to(".floating-shape", {
+            yPercent: 50,
+            ease: "none",
+            scrollTrigger: {
+                trigger: "#main-container",
+                start: "top bottom",
+                end: "bottom top",
+                scrub: true
+            }
+        });
+
+    </script>
+</body>
+
+</html>
